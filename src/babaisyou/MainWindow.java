@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- *
+ * a
  * @author scien
  */
 public class MainWindow extends javax.swing.JFrame {
@@ -36,8 +36,7 @@ public class MainWindow extends javax.swing.JFrame {
         lev.addBlock(Block.text_IS, 2, 1);
         lev.addBlock(Block.text_YOU, 3, 1);
         lev.addBlock(Block.object_BABA, 2, 3);
-        lev.addBlock(Block.object_BABA, 2, 4);
-        
+
         LevelList.put(lev.getName(), lev);
         
         initComponents();
