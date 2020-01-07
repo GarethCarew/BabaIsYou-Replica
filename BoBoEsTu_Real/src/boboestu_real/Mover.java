@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package boboestu_real;
+package babaisyou;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 import java.util.TreeMap;
 
 /**
@@ -59,10 +58,7 @@ class Mover {
             }
         }
         
-        for( String s : cords_is )
-        {
-            checkValidIs( s );
-        }
+        for( String s )
         
         long timeElapsed2 = System.nanoTime();
 
@@ -105,12 +101,6 @@ class Mover {
         if(map[x][y] == block)
             return true;
         return false;
-        
-    }
-
-    private void checkValidIs(String s)
-    {
-        Scanner scan = new Scanner( s );
         
     }
     
