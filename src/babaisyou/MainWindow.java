@@ -1,6 +1,5 @@
 package babaisyou;
 
-import java.awt.Component;
 import java.io.IOException;
 import java.util.TreeMap;
 import java.util.logging.Logger;
@@ -14,7 +13,6 @@ import java.io.ObjectOutputStream;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.filechooser.FileSystemView;
 
 /**
  *
@@ -38,6 +36,7 @@ public class MainWindow extends javax.swing.JFrame {
         lev.addBlock(Block.text_IS, 2, 1);
         lev.addBlock(Block.text_YOU, 3, 1);
         lev.addBlock(Block.object_BABA, 2, 3);
+        lev.addBlock(Block.object_BABA, 2, 4);
         
         LevelList.put(lev.getName(), lev);
         
