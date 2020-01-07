@@ -5,28 +5,28 @@
  */
 package babaisyou;
 
-import java.io.Serializable;
 
 /**
  *
  * @author scien
  */
-class Level implements Serializable{
+class Level
+{
     
     private Block[][] map;
-    private String name;
+
+    private String[][] properties;
          
     public Level()
     {
-        name = "00";
         map = new Block[0][0];
+        properties = new String[0][0];
     }
     
-    public Level(String levName, int xSize, int ySize)
+    public Level(int xSize, int ySize)
     {
-        name = levName;
-        map = new Block[xSize][ySize];
-
+        map         = new Block[    xSize ][ ySize ];
+        properties  = new String[   xSize ][ ySize ];
     }
     
     public void addBlock(Block b, int xPos, int yPos)
@@ -34,7 +34,8 @@ class Level implements Serializable{
         map[yPos][xPos] = b;
     }
 
-    public Block[][] getMap() {
+    public Block[][] getMap()
+    {
         for (int x = 0; x < map.length; x++)
         {
             for(int y = 0; y < map[x].length; y++)
@@ -48,12 +49,10 @@ class Level implements Serializable{
         return map;
     }
 
-    public void setMap(Block[][] map) {
+    public void setMap(Block[][] map)
+    {
         this.map = map;
     }
     
-    public String getName()
-    {
-        return name;
-    }
+    
 }
