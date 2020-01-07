@@ -15,7 +15,7 @@ public class MainWindow extends javax.swing.JFrame {
     private String currentLevel = "";
     
     /**
-     * Creates new form MainWindow
+     * Creates new form MainWindow0
      * @throws java.io.IOException
      */
     public MainWindow() throws IOException {
