@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- *
+ * a
  * @author scien
  */
 public class MainWindow extends javax.swing.JFrame {
