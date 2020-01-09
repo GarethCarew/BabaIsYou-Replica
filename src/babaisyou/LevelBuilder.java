@@ -7,10 +7,7 @@ package babaisyou;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
 
 /**
  *
@@ -18,11 +15,11 @@ import javax.imageio.ImageIO;
  */
 public class LevelBuilder extends Canvas{
     
-    Images i;
+    Images images;
     
     public LevelBuilder() throws IOException
     {
-        Images images = new Images();
+        images = new Images();
     }
 
     public void paint(Graphics g, Level level) {

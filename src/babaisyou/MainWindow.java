@@ -343,7 +343,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void move2(String dir)
     {
         Mover m = new Mover();
-        
+
         if ( dir.equals( "right" ) )
             m.moveRight(LevelList, currentLevel);    }
 }
