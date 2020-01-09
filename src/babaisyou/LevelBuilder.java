@@ -36,7 +36,7 @@ public class LevelBuilder extends Canvas{
                                         switch (b[x][y]) {
                     case object_EMPTY:
                         //g.drawImage(object_EMPTY, x*24, y*24, 24, 24, this);
-                        System.out.print(" | " + Block.object_EMPTY.name() + " | ");
+                        System.out.print(" | \u001B[31m" + Block.object_EMPTY.name() + " | ");
                         break;
                     case text_IS:
                         //g.drawImage(text_IS, x*24, y*24, 24, 24, this);
