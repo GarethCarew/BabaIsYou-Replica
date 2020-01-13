@@ -7,10 +7,7 @@ package babaisyou;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
 
 /**
  *
@@ -18,36 +15,11 @@ import javax.imageio.ImageIO;
  */
 public class LevelBuilder extends Canvas{
     
-    private final Image text_IS;
-    private final Image text_BABA;
-    private final Image text_YOU;
-    private final Image text_WIN;
-    private final Image text_FLAG;
-    private final Image text_STOP;
-    private final Image text_WALL;
-    private final Image text_ROCK;
-    private final Image text_PUSH;
-    private final Image object_EMPTY;
-    private final Image object_BABA;
-    private final Image object_FLAG;
-    private final Image object_WALL;
-    private final Image object_ROCK;
+    Images images;
     
-    public LevelBuilder() throws IOException {
-        text_IS = ImageIO.read(new File("src/objects/text_is_0_1.png"));
-        text_BABA = ImageIO.read(new File("src/objects/text_baba_0_1.png"));
-        text_YOU = ImageIO.read(new File("src/objects/text_you_0_1.png"));
-        text_WIN = ImageIO.read(new File("src/objects/text_win_0_1.png"));
-        text_FLAG = ImageIO.read(new File("src/objects/text_flag_0_1.png"));
-        text_STOP = ImageIO.read(new File("src/objects/text_stop_0_1.png"));
-        text_WALL = ImageIO.read(new File("src/objects/text_wall_0_1.png"));
-        text_ROCK = ImageIO.read(new File("src/objects/text_rock_0_1.png"));
-        text_PUSH = ImageIO.read(new File("src/objects/text_push_0_1.png"));
-        object_EMPTY = ImageIO.read(new File("src/objects/empty_0_1.png"));
-        object_BABA = ImageIO.read(new File("src/objects/baba_0_1.png"));
-        object_FLAG = ImageIO.read(new File("src/objects/flag_0_1.png"));
-        object_WALL = ImageIO.read(new File("src/objects/wall_0_1.png"));
-        object_ROCK = ImageIO.read(new File("src/objects/rock_0_1.png"));
+    public LevelBuilder() throws IOException
+    {
+        images = new Images();
     }
 
     public void paint(Graphics g, Level level) {
