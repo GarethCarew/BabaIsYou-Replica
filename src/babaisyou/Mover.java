@@ -7,6 +7,7 @@ package babaisyou;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.TreeMap;
 
@@ -21,7 +22,7 @@ class Mover {
     
     private ArrayList<Scanner> you = new ArrayList<>();
     private ArrayList<String> stop = new ArrayList<>();
-    private ArrayList<Scanner> push = new ArrayList<>();
+    private ArrayList<String> push = new ArrayList<>();
     
     private ArrayList<String> cords_text = new ArrayList<>();
     private ArrayList<String> cords_obj = new ArrayList<>();
@@ -124,6 +125,9 @@ class Mover {
             case "text_STOP":
                 stop.add( x + " " + y );
                 break;
+            case "text_PUSH":
+                push.add( x + " " + y );
+                break;
             default:
                 System.out.println("ERROR type not found");
         }
@@ -196,6 +200,7 @@ class Mover {
 
     private void moveReal(String movement)
     {
+        ArrayList<Scanner> pushing = new ArrayList<>();
         switch( movement )
         {
             case "right":
@@ -204,10 +209,36 @@ class Mover {
                     int x = s.nextInt();
                     int y = s.nextInt();
 
+                    pushing.add( new Scanner( x + " " + y ) );
+
+                    while( true )
+                    {
+                        if( push.contains( x + " " + ( y + 1 ) ) )
+                        {
+                            pushing.add( new Scanner( x + " " + ( y + 1 ) ) );
+                            y++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+                
+                Collections.reverse( pushing );
+                for( Scanner s : pushing )
+                {
+                    int x = s.nextInt();
+                    int y = s.nextInt();
+
                     if( !stop.contains( x + " " + ( y + 1 ) ) && ( y < map[0].length - 1 ) )
                     {
                         map[x][y + 1] = map[x][y];
                         map[x][y] = Block.object_EMPTY;
+                    }
+                    else
+                    {
+                        stop.add( x + " " + y );
                     }
                 }
                 break;
@@ -218,39 +249,120 @@ class Mover {
                     int x = s.nextInt();
                     int y = s.nextInt();
 
+                    pushing.add( new Scanner( x + " " + y ) );
+
+                    while( true )
+                    {
+                        if( push.contains( x + " " + ( y - 1 ) ) )
+                        {
+                            pushing.add( new Scanner( x + " " + ( y - 1 ) ) );
+                            y--;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+                
+                Collections.reverse( pushing );
+                for( Scanner s : pushing )
+                {
+                    int x = s.nextInt();
+                    int y = s.nextInt();
+
                     if( !stop.contains( x + " " + ( y - 1 ) ) && ( y > 0 ) )
                     {
                         map[x][y - 1] = map[x][y];
                         map[x][y] = Block.object_EMPTY;
                     }
+                    else
+                    {
+                        stop.add( x + " " + y );
+                    }
                 }
                 break;
+
             case "up":
                 for( Scanner s : you )
                 {
                     int x = s.nextInt();
                     int y = s.nextInt();
 
-                    if( !stop.contains( ( ( x - 1 ) + " " + y ) ) && ( x > 0 ) )
+                    pushing.add( new Scanner( x + " " + y ) );
+
+                    while( true )
+                    {
+                        if( push.contains( ( x - 1 ) + " " + y ) )
+                        {
+                            pushing.add( new Scanner( ( x - 1 ) + " " + y ) );
+                            x--;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+                
+                Collections.reverse( pushing );
+                for( Scanner s : pushing )
+                {
+                    int x = s.nextInt();
+                    int y = s.nextInt();
+
+                    if( !stop.contains( ( x - 1 ) + " " + y ) && ( x > 0 ) )
                     {
                         map[x - 1][y] = map[x][y];
                         map[x][y] = Block.object_EMPTY;
                     }
+                    else
+                    {
+                        stop.add( x + " " + y );
+                    }
                 }
                 break;
+
             case "down":
                 for( Scanner s : you )
                 {
                     int x = s.nextInt();
                     int y = s.nextInt();
 
-                    if( !stop.contains( ( x + 1 ) + " " + y  ) && ( x < map.length - 1 ) )
+                    pushing.add( new Scanner( x + " " + y ) );
+
+                    while( true )
+                    {
+                        if( push.contains( ( x + 1 ) + " " + y ) )
+                        {
+                            pushing.add( new Scanner( ( x + 1 ) + " " + y ) );
+                            x++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+                
+                 Collections.reverse( pushing );
+                for( Scanner s : pushing )
+                {
+                    int x = s.nextInt();
+                    int y = s.nextInt();
+
+                    if( !stop.contains( ( x + 1 ) + " " + y ) && ( x < map.length ) )
                     {
                         map[x + 1][y] = map[x][y];
                         map[x][y] = Block.object_EMPTY;
                     }
+                    else
+                    {
+                        stop.add( x + " " + y );
+                    }
                 }
                 break;
+
         }
         
     }
