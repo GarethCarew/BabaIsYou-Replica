@@ -21,6 +21,7 @@ class Mover {
     
     private ArrayList<Scanner> you = new ArrayList<>();
     private ArrayList<Scanner> stop = new ArrayList<>();
+    private ArrayList<Scanner> push = new ArrayList<>();
     
     private ArrayList<String> cords_text = new ArrayList<>();
     private ArrayList<String> cords_obj = new ArrayList<>();
@@ -119,6 +120,9 @@ class Mover {
         {
             case "text_YOU":
                 you.add( new Scanner( x + " " + y ) );
+                break;
+            case "text_STOP":
+                stop.add( new Scanner( x + " " + y ) );
                 break;
             default:
                 System.out.println("ERROR type not found");
