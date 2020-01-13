@@ -23,6 +23,9 @@ public class MainWindow extends javax.swing.JFrame {
     private TreeMap<String,Level> LevelList;
     private String currentLevel = "";
     
+    private LevelBuilder levelbuilder;
+    private Level level;
+    
     /**
      * Creates new form MainWindow
      * @throws java.io.IOException
@@ -274,12 +277,12 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void runGame() throws IOException {
 
-        LevelBuilder lb = new LevelBuilder();
+        levelbuilder = new LevelBuilder();
         
-        Level level = LevelList.get("00");
+        level = LevelList.get("00");
         currentLevel = "00";
         
-        lb.paint(panelGame.getGraphics(), level);
+        levelbuilder.paint(panelGame.getGraphics(), level);
         
         
 
@@ -354,5 +357,10 @@ public class MainWindow extends javax.swing.JFrame {
         Mover m = new Mover();
         
         if ( dir.equals( "right" ) )
-            m.moveRight(LevelList, currentLevel);    }
+            m.moveRight(LevelList, currentLevel);
+        
+        level.setMap( m.getMap() );
+        
+        levelbuilder.paint( panelGame.getGraphics(), level );
+    }
 }
