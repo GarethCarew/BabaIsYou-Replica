@@ -22,21 +22,239 @@ class Mover {
     private ArrayList<Scanner> you = new ArrayList<>();
     private ArrayList<Scanner> stop = new ArrayList<>();
     
+    private ArrayList<String> cords_text = new ArrayList<>();
+    private ArrayList<String> cords_obj = new ArrayList<>();
+    private ArrayList<String> cords_is = new ArrayList<>();
+    
     private Block[][] map;
     
-    void moveLeft(TreeMap<String,Level> LevelList, String currentLevel) {
-        Block[][] map = LevelList.get(currentLevel).getMap();
+    void moveRight( TreeMap<String,Level> LevelList, String currentLevel )
+    {
+        long timeElapsed = System.nanoTime();
+
+        addCords( LevelList, currentLevel );
+
+        checkEachIs();
+
+        moveReal( "right" );
+
+        long timeElapsed2 = System.nanoTime();
+
+        System.out.println( timeElapsed2 - timeElapsed );
+    }
+    
+    void moveLeft(TreeMap<String,Level> LevelList, String currentLevel)
+    {
+        long timeElapsed = System.nanoTime();
+
+            addCords( LevelList, currentLevel );
+
+            checkEachIs();
+            
+            moveReal( "left" );
+            
+            long timeElapsed2 = System.nanoTime();
+
+            System.out.println( timeElapsed2 - timeElapsed );
+
+    }
+    
+    void moveUp( TreeMap<String,Level> LevelList, String currentLevel )
+    {
+        long timeElapsed = System.nanoTime();
+
+        addCords( LevelList, currentLevel );
+
+        checkEachIs();
+
+        moveReal( "up" );
+
+        long timeElapsed2 = System.nanoTime();
+
+        System.out.println( timeElapsed2 - timeElapsed );
+    }
+
+    void moveDown( TreeMap<String,Level> LevelList, String currentLevel )
+    {
+        long timeElapsed = System.nanoTime();
+
+        addCords( LevelList, currentLevel );
+
+        checkEachIs();
+
+        moveReal( "down" );
+
+        long timeElapsed2 = System.nanoTime();
+
+        System.out.println( timeElapsed2 - timeElapsed );
+    }
+    
+    private Scanner checkValidIs(String s)
+    {
+        Scanner scan = new Scanner( s );
+
+        String type = scan.next();
+        int x = scan.nextInt();
+        int y = scan.nextInt();
         
-        for( int i = 0; i < map.length; i++ )
+        if( x > 0 && x < map.length )
         {
-            for( Block b : map[i] )
+            if( noun.contains( map[x][y - 1].name() ) && verb.contains( map[x][y + 1].name() ) )
             {
-                System.out.print( i + " " );
+                Scanner output = new Scanner( map[x][y - 1].name() + " " + map[x][y + 1].name() + " " + x + " " + y);
+                return output;
+            }
+            else if( noun.contains( map[x - 1][y].name() ) && verb.contains( map[x + 1][y].name() ) )
+            {
+                Scanner output = new Scanner( map[x - 1][y].name() + " " + map[x + 1][y].name() + " " + x + " " + y);
+                return output;
             }
         }
+        return null;
     }
+
+    private void addProp(String n, int x, int y)
+    {
+        switch(n)
+        {
+            case "text_YOU":
+                you.add( new Scanner( x + " " + y ) );
+                break;
+            default:
+                System.out.println("ERROR type not found");
+        }
+    }
+    
+    public Block[][] getMap()
+    {
+        return map;
+    }
+
+    private void addCords(TreeMap<String, Level> LevelList, String currentLevel)
+    {
+        map = LevelList.get( currentLevel ).getMap();
+
+            for( int i = 0; i < map.length; i++ )
+            {
+                for( int e = 0; e < map[i].length; e++ )
+                {
+                    if( !map[i][e].name().equals( "object_EMPTY" ) && map[i][e].name().equals( "text_IS" ) )
+                    {
+                        cords_is.add(map[i][e].name() + " " + i + " " + e );
+                    }
+                    else if( !map[i][e].name().equals( "object_EMPTY" ) && map[i][e].name().contains( "text" ) )
+                    {
+                        cords_text.add(map[i][e].name() + " " + i + " " + e );
+                    }
+                    else if( !map[i][e].name().equals( "object_EMPTY" ) && map[i][e].name().contains( "object" ) )
+                    {
+                        cords_obj.add(map[i][e].name() + " " + i + " " + e );
+                    }
+                }
+            }
+    }
+
+    private void checkEachIs()
+    {
+        for( String s : cords_is )
+            {
+                Scanner scan = checkValidIs( s );
+                if( scan != null )
+                {
+                    scan.useDelimiter( "_" );
+                    scan.next();
+                    scan.useDelimiter( " " );
+                    String v = scan.next();                                     //v == verb
+                    
+                    
+                    String n = scan.next();                                     //n == noun
+                    
+                    for( String o : cords_obj )
+                    {
+                        Scanner temp = new Scanner( o );
+
+                        temp.useDelimiter( "_" );
+                        temp.next();
+                        temp.useDelimiter( " " );
+                        String check = temp.next();
+
+                        int x = temp.nextInt();
+                        int y = temp.nextInt();
+                        
+                        if( check.equals( v ) )
+                        {
+                            addProp( n, x, y );
+                        }
+                    }
+                }
+            }
+    }
+
+    private void moveReal(String movement)
+    {
+        switch( movement )
+        {
+            case "right":
+                for( Scanner s : you )
+                {
+                    int x = s.nextInt();
+                    int y = s.nextInt();
+
+                    if( !stop.contains( new Scanner( x + " " + ( y + 1 ) ) ) && ( y < map[0].length - 1 ) )
+                    {
+                        map[x][y + 1] = map[x][y];
+                        map[x][y] = Block.object_EMPTY;
+                    }
+                }
+                break;
+
+            case "left":
+                for( Scanner s : you )
+                {
+                    int x = s.nextInt();
+                    int y = s.nextInt();
+
+                    if( !stop.contains( new Scanner( x + " " + ( y - 1 ) ) ) && ( y > 0 ) )
+                    {
+                        map[x][y - 1] = map[x][y];
+                        map[x][y] = Block.object_EMPTY;
+                    }
+                }
+                break;
+            case "up":
+                for( Scanner s : you )
+                {
+                    int x = s.nextInt();
+                    int y = s.nextInt();
+
+                    if( !stop.contains( new Scanner( ( x - 1 ) + " " + y ) ) && ( x > 0 ) )
+                    {
+                        map[x - 1][y] = map[x][y];
+                        map[x][y] = Block.object_EMPTY;
+                    }
+                }
+                break;
+            case "down":
+                for( Scanner s : you )
+                {
+                    int x = s.nextInt();
+                    int y = s.nextInt();
+
+                    if( !stop.contains( new Scanner( ( x + 1 ) + " " + y ) ) && ( x < map.length - 1 ) )
+                    {
+                        map[x + 1][y] = map[x][y];
+                        map[x][y] = Block.object_EMPTY;
+                    }
+                }
+                break;
+        }
         
-        void moveRight( TreeMap<String,Level> LevelList, String currentLevel )
+    }
+}
+
+
+/*
+void moveRight( TreeMap<String,Level> LevelList, String currentLevel )
         {
         
             ArrayList<String> cords_text = new ArrayList<>();
@@ -114,80 +332,5 @@ class Mover {
             long timeElapsed2 = System.nanoTime();
 
             System.out.println( timeElapsed2 - timeElapsed );
-
-        
-        /*
-        for(int x = 0; x < map.length; x++)
-        {
-            for(int y = 0; y < map[x].length; y++)
-            {
-                if(x > 2 && y > 2)
-                {
-                    if(check(map, x, y, Block.YOU))
-                    {
-                        if(check(map, x-1, y, Block.IS))
-                        {
-                            if(check(map, x-2, y, Block.BABA))
-                            {
-
-                            }
-                            else if(check(map, x-2, y, Block.ROCK))
-                            {
-
-                            }
-                            else if(check(map, x-2, y, Block.FLAG))
-                            {
-
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        */
     }
-
-    private boolean check(Block[][] map, int x, int y, Block block) {
-
-        if(map[x][y] == block)
-            return true;
-        return false;
-        
-    }
-
-    private Scanner checkValidIs(String s)
-    {
-        Scanner scan = new Scanner( s );
-
-        String type = scan.next();
-        int x = scan.nextInt();
-        int y = scan.nextInt();
-        
-        if( x > 0 && x < map.length )
-        {
-            if( noun.contains( map[x][y - 1].name() ) && verb.contains( map[x][y + 1].name() ) )
-            {
-                Scanner output = new Scanner( map[x][y - 1].name() + " " + map[x][y + 1].name() + " " + x + " " + y);
-                return output;
-            }
-        }
-        return null;
-    }
-
-    private void addProp(String n, int x, int y)
-    {
-        switch(n)
-        {
-            case "text_YOU":
-                you.add( new Scanner( x + " " + y ) );
-                break;
-            default:
-                System.out.println("ERROR type not found");
-        }
-    }
-    
-    public Block[][] getMap()
-    {
-        return map;
-    }
-}
+*/
