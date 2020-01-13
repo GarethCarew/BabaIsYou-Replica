@@ -16,11 +16,13 @@ import java.util.TreeMap;
  */
 class Mover {
 
-    private ArrayList<String> noun = new ArrayList<>( Arrays.asList("text_BABA", "text_FLAG", "text_WALL", "text_ROCK" ) );
-    private String[] verb = { "text_YOU", "text_WIN", "text_STOP", "text_PUSH" };
-    private ArrayList<String> cords_text = new ArrayList<>();
-    private ArrayList<String> cords_obj = new ArrayList<>();
-    private ArrayList<String> cords_is = new ArrayList<>();
+    private ArrayList<String> noun = new ArrayList<>( Arrays.asList( "text_BABA", "text_FLAG", "text_WALL", "text_ROCK" ) );
+    private ArrayList<String> verb = new ArrayList<>( Arrays.asList( "text_YOU", "text_WIN", "text_STOP", "text_PUSH" ) );
+    
+    private ArrayList<Scanner> you = new ArrayList<>();
+    private ArrayList<Scanner> stop = new ArrayList<>();
+    
+    private Block[][] map;
     
     void moveLeft(TreeMap<String,Level> LevelList, String currentLevel) {
         Block[][] map = LevelList.get(currentLevel).getMap();
@@ -36,37 +38,70 @@ class Mover {
         
         void moveRight( TreeMap<String,Level> LevelList, String currentLevel )
         {
-        Block[][] map = LevelList.get(currentLevel).getMap();
         
-        long timeElapsed = System.nanoTime();
-        
-        for( int i = 0; i < map.length; i++ )
-        {
-            for( int e = 0; e < map[i].length; e++ )
+            ArrayList<String> cords_text = new ArrayList<>();
+            ArrayList<String> cords_obj = new ArrayList<>();
+            ArrayList<String> cords_is = new ArrayList<>();
+
+            map = LevelList.get( currentLevel ).getMap();
+
+            long timeElapsed = System.nanoTime();
+
+            for( int i = 0; i < map.length; i++ )
             {
-                if( !map[i][e].name().equals( "object_EMPTY" ) && map[i][e].name().equals( "text_IS" ) )
+                for( int e = 0; e < map[i].length; e++ )
                 {
-                    cords_is.add(map[i][e].name() + "," + i + "," + e );
-                }
-                else if( !map[i][e].name().equals( "object_EMPTY" ) && map[i][e].name().contains( "text" ) )
-                {
-                    cords_text.add(map[i][e].name() + "," + i + "," + e );
-                }
-                else if( !map[i][e].name().equals( "object_EMPTY" ) && map[i][e].name().contains( "object" ) )
-                {
-                    cords_obj.add(map[i][e].name() + "," + i + "," + e );
+                    if( !map[i][e].name().equals( "object_EMPTY" ) && map[i][e].name().equals( "text_IS" ) )
+                    {
+                        cords_is.add(map[i][e].name() + " " + i + " " + e );
+                    }
+                    else if( !map[i][e].name().equals( "object_EMPTY" ) && map[i][e].name().contains( "text" ) )
+                    {
+                        cords_text.add(map[i][e].name() + " " + i + " " + e );
+                    }
+                    else if( !map[i][e].name().equals( "object_EMPTY" ) && map[i][e].name().contains( "object" ) )
+                    {
+                        cords_obj.add(map[i][e].name() + " " + i + " " + e );
+                    }
                 }
             }
-        }
-        
-        for( String s : cords_is )
-        {
-            checkValidIs( s );
-        }
-        
-        long timeElapsed2 = System.nanoTime();
 
-        System.out.print( timeElapsed2 - timeElapsed );
+            for( String s : cords_is )
+            {
+                Scanner scan = checkValidIs( s );
+                if( scan != null )
+                {
+                    String v = scan.next();                                     //v == verb
+                    String n = scan.next();                                     //n == noun
+                    int x = scan.nextInt();
+                    int y = scan.nextInt();
+                    
+                    for( String o : cords_obj )
+                    {
+                        if( o.equals( v ) )
+                        {
+                            addProp( n, x, y );
+                        }
+                    }
+                }
+            }
+            
+            for( Scanner s : you )
+            {
+                int x = s.nextInt();
+                int y = s.nextInt();
+                System.out.println("move");
+                if( !stop.contains( new Scanner( x + " " + ( y + 1 ) ) ) )
+                {
+                    map[x][y + 1] = map[x][y];
+                    map[x][y] = Block.object_EMPTY;
+                    System.out.println("move");
+                }
+            }
+
+            long timeElapsed2 = System.nanoTime();
+
+            System.out.println( timeElapsed2 - timeElapsed );
 
         
         /*
@@ -108,10 +143,36 @@ class Mover {
         
     }
 
-    private void checkValidIs(String s)
+    private Scanner checkValidIs(String s)
     {
         Scanner scan = new Scanner( s );
+
+        String type = scan.next();
+        int x = scan.nextInt();
+        int y = scan.nextInt();
         
+        if( x > 0 && x < map.length )
+        {
+            if( noun.contains( map[x][y - 1].name() ) && verb.contains( map[x][y + 1].name() ) )
+            {
+                Scanner output = new Scanner( map[x][y - 1].name() + " " + map[x][y + 1].name() + " " + x + " " + y);
+                return output;
+            }
+        }
+        return null;
+    }
+
+    private void addProp(String n, int x, int y)
+    {
+        switch(n)
+        {
+            case "you":
+                you.add( new Scanner( x + " " + y ) );
+        }
     }
     
+    public Block[][] getMap()
+    {
+        return map;
+    }
 }
