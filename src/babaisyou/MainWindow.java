@@ -53,7 +53,8 @@ public class MainWindow extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
         panelGame = new javax.swing.JPanel();
@@ -84,17 +85,40 @@ public class MainWindow extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1258, 730));
 
         button_left.setText("LEFT");
+        button_left.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                button_leftActionPerformed(evt);
+            }
+        });
 
         button_right.setText("RIGHT");
-        button_right.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        button_right.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 button_rightActionPerformed(evt);
             }
         });
 
         button_down.setText("DOWN");
+        button_down.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                button_downActionPerformed(evt);
+            }
+        });
 
         button_up.setText("UP");
+        button_up.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                button_upActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelGameLayout = new javax.swing.GroupLayout(panelGame);
         panelGame.setLayout(panelGameLayout);
@@ -134,22 +158,28 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton1ActionPerformed(evt);
             }
         });
 
         jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton2ActionPerformed(evt);
             }
         });
 
         jButton3.setText("jButton3");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton3ActionPerformed(evt);
             }
         });
@@ -216,6 +246,21 @@ public class MainWindow extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_button_rightActionPerformed
         move2( "right" );
     }//GEN-LAST:event_button_rightActionPerformed
+
+    private void button_leftActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_button_leftActionPerformed
+    {//GEN-HEADEREND:event_button_leftActionPerformed
+        move2( "left" );
+    }//GEN-LAST:event_button_leftActionPerformed
+
+    private void button_upActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_button_upActionPerformed
+    {//GEN-HEADEREND:event_button_upActionPerformed
+        move2( "up" );
+    }//GEN-LAST:event_button_upActionPerformed
+
+    private void button_downActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_button_downActionPerformed
+    {//GEN-HEADEREND:event_button_downActionPerformed
+        move2( "down" );
+    }//GEN-LAST:event_button_downActionPerformed
 
     /**
      * @param args the command line arguments
@@ -347,8 +392,22 @@ public class MainWindow extends javax.swing.JFrame {
     {
         Mover m = new Mover();
 
-        if ( dir.equals( "right" ) )
-            m.moveRight(LevelList, currentLevel);
+        switch( dir )
+        {
+            case "right":
+                m.moveRight(LevelList, currentLevel);
+                break;
+            case "left":
+                m.moveLeft(LevelList, currentLevel);
+                break;
+            case "up":
+                m.moveUp(LevelList, currentLevel);
+                break;
+            case "down":
+                m.moveDown(LevelList, currentLevel);
+                break;
+            
+        }
         
         level.setMap( m.getMap() );
         

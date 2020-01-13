@@ -136,6 +136,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="LEFT"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_leftActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="button_right">
           <Properties>
@@ -149,11 +152,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="DOWN"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_downActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="button_up">
           <Properties>
             <Property name="text" type="java.lang.String" value="UP"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_upActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
