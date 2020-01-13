@@ -195,7 +195,26 @@ class Mover {
                         }
                     }
                 }
+                
+                Scanner scan2 = new Scanner( s );
+
+                scan2.next();
+                int x = scan2.nextInt();
+                int y = scan2.nextInt();
+
+                push.add( x + " " + y );
             }
+        
+        for( String s : cords_text )
+        {
+            Scanner scan = new Scanner( s );
+            
+            scan.next();
+            int x = scan.nextInt();
+            int y = scan.nextInt();
+            
+            push.add( x + " " + y );
+        }
     }
 
     private void moveReal(String movement)
