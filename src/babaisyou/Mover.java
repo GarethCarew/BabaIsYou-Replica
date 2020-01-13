@@ -20,7 +20,7 @@ class Mover {
     private ArrayList<String> verb = new ArrayList<>( Arrays.asList( "text_YOU", "text_WIN", "text_STOP", "text_PUSH" ) );
     
     private ArrayList<Scanner> you = new ArrayList<>();
-    private ArrayList<Scanner> stop = new ArrayList<>();
+    private ArrayList<String> stop = new ArrayList<>();
     private ArrayList<Scanner> push = new ArrayList<>();
     
     private ArrayList<String> cords_text = new ArrayList<>();
@@ -122,7 +122,7 @@ class Mover {
                 you.add( new Scanner( x + " " + y ) );
                 break;
             case "text_STOP":
-                stop.add( new Scanner( x + " " + y ) );
+                stop.add( x + " " + y );
                 break;
             default:
                 System.out.println("ERROR type not found");
@@ -204,11 +204,7 @@ class Mover {
                     int x = s.nextInt();
                     int y = s.nextInt();
 
-                    for(Scanner ss : stop )
-                    {
-                        System.out.println( ss.nextLine() + "::" + x +  " " + y);
-                    }
-                    if( !stop.contains( new Scanner( x + " " + ( y + 1 ) ) ) && ( y < map[0].length - 1 ) )
+                    if( !stop.contains( x + " " + ( y + 1 ) ) && ( y < map[0].length - 1 ) )
                     {
                         map[x][y + 1] = map[x][y];
                         map[x][y] = Block.object_EMPTY;
@@ -222,7 +218,7 @@ class Mover {
                     int x = s.nextInt();
                     int y = s.nextInt();
 
-                    if( !stop.contains( new Scanner( x + " " + ( y - 1 ) ) ) && ( y > 0 ) )
+                    if( !stop.contains( x + " " + ( y - 1 ) ) && ( y > 0 ) )
                     {
                         map[x][y - 1] = map[x][y];
                         map[x][y] = Block.object_EMPTY;
@@ -235,7 +231,7 @@ class Mover {
                     int x = s.nextInt();
                     int y = s.nextInt();
 
-                    if( !stop.contains( new Scanner( ( x - 1 ) + " " + y ) ) && ( x > 0 ) )
+                    if( !stop.contains( ( ( x - 1 ) + " " + y ) ) && ( x > 0 ) )
                     {
                         map[x - 1][y] = map[x][y];
                         map[x][y] = Block.object_EMPTY;
@@ -248,7 +244,7 @@ class Mover {
                     int x = s.nextInt();
                     int y = s.nextInt();
 
-                    if( !stop.contains( new Scanner( ( x + 1 ) + " " + y ) ) && ( x < map.length - 1 ) )
+                    if( !stop.contains( ( x + 1 ) + " " + y  ) && ( x < map.length - 1 ) )
                     {
                         map[x + 1][y] = map[x][y];
                         map[x][y] = Block.object_EMPTY;
