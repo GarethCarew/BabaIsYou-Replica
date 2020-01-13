@@ -71,14 +71,27 @@ class Mover {
                 Scanner scan = checkValidIs( s );
                 if( scan != null )
                 {
+                    scan.useDelimiter( "_" );
+                    scan.next();
+                    scan.useDelimiter( " " );
                     String v = scan.next();                                     //v == verb
+                    
+                    
                     String n = scan.next();                                     //n == noun
-                    int x = scan.nextInt();
-                    int y = scan.nextInt();
                     
                     for( String o : cords_obj )
                     {
-                        if( o.equals( v ) )
+                        Scanner temp = new Scanner( o );
+
+                        temp.useDelimiter( "_" );
+                        temp.next();
+                        temp.useDelimiter( " " );
+                        String check = temp.next();
+
+                        int x = temp.nextInt();
+                        int y = temp.nextInt();
+                        
+                        if( check.equals( v ) )
                         {
                             addProp( n, x, y );
                         }
@@ -90,12 +103,11 @@ class Mover {
             {
                 int x = s.nextInt();
                 int y = s.nextInt();
-                System.out.println("move");
+
                 if( !stop.contains( new Scanner( x + " " + ( y + 1 ) ) ) )
                 {
                     map[x][y + 1] = map[x][y];
                     map[x][y] = Block.object_EMPTY;
-                    System.out.println("move");
                 }
             }
 
@@ -166,8 +178,11 @@ class Mover {
     {
         switch(n)
         {
-            case "you":
+            case "text_YOU":
                 you.add( new Scanner( x + " " + y ) );
+                break;
+            default:
+                System.out.println("ERROR type not found");
         }
     }
     
