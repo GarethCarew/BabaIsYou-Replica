@@ -204,6 +204,10 @@ class Mover {
                     int x = s.nextInt();
                     int y = s.nextInt();
 
+                    for(Scanner ss : stop )
+                    {
+                        System.out.println( ss );
+                    }
                     if( !stop.contains( new Scanner( x + " " + ( y + 1 ) ) ) && ( y < map[0].length - 1 ) )
                     {
                         map[x][y + 1] = map[x][y];
