@@ -25,8 +25,8 @@ class Level
     
     public Level(int xSize, int ySize)
     {
-        map         = new Block[    xSize ][ ySize ];
-        properties  = new String[   xSize ][ ySize ];
+        map         = new Block[    ySize ][ xSize ];
+        properties  = new String[   ySize ][ xSize ];
     }
     
     public void addBlock(Block b, int xPos, int yPos)

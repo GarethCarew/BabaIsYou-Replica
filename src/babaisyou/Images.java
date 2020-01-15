@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -28,10 +29,11 @@ public class Images {
     public final Image object_EMPTY;
     public final Image object_BABA;
     public final Image object_FLAG;
-    public final Image object_WALL;
+    public final Image object_WALL_noC;
     public final Image object_ROCK;
     
     public Images() throws IOException {
+        
         text_IS = ImageIO.read(new File("src/objects/text_is_0_1.png"));
         text_BABA = ImageIO.read(new File("src/objects/text_baba_0_1.png"));
         text_YOU = ImageIO.read(new File("src/objects/text_you_0_1.png"));
@@ -44,7 +46,8 @@ public class Images {
         object_EMPTY = ImageIO.read(new File("src/objects/empty_0_1.png"));
         object_BABA = ImageIO.read(new File("src/objects/baba_0_1.png"));
         object_FLAG = ImageIO.read(new File("src/objects/flag_0_1.png"));
-        object_WALL = ImageIO.read(new File("src/objects/wall_0_1.png"));
+        object_WALL_noC = ImageIO.read(new File("src/objects/wall_0_1.png"));
         object_ROCK = ImageIO.read(new File("src/objects/rock_0_1.png"));
+        
     }
 }
