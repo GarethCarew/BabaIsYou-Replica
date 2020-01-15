@@ -16,112 +16,34 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * ab
- *
  * @author scien
  */
 public class MainWindow extends javax.swing.JFrame {
-
-    private TreeMap<String, Level> LevelList;
+    
+    private TreeMap<String,Level> LevelList;
     private String currentLevel = "";
-
+    
     private LevelBuilder levelbuilder;
     private Level level;
     
+    /**
+     * Creates new form MainWindow
+     * @throws java.io.IOException
+     */
     public MainWindow() throws IOException {
         this.LevelList = new TreeMap<>();
-
-        Level lev = new Level(35, 20);
-        //text in level 00
-        lev.addBlock(Block.text_BABA, 12, 1);
-        lev.addBlock(Block.text_IS, 13, 1);
-        lev.addBlock(Block.text_YOU, 14, 1);
-
-        lev.addBlock(Block.text_ROCK, 20, 9);
-        lev.addBlock(Block.text_IS, 21, 9);
-        lev.addBlock(Block.text_PUSH, 22, 9);
-
-        lev.addBlock(Block.text_WALL, 12, 9);
-        lev.addBlock(Block.text_IS, 13, 9);
-        lev.addBlock(Block.text_STOP, 14, 9);
-
-        lev.addBlock(Block.text_FLAG, 20, 1);
-        lev.addBlock(Block.text_IS, 21, 1);
-        lev.addBlock(Block.text_WIN, 22, 1);
-
-        //objects in level 00
-        lev.addBlock(Block.object_BABA, 13, 5);
-        lev.addBlock(Block.object_FLAG, 21, 5);
-
-        lev.addBlock(Block.object_ROCK, 17, 4);
-        lev.addBlock(Block.object_ROCK, 17, 5);
-        lev.addBlock(Block.object_ROCK, 17, 6);
-
-        lev.addBlock(Block.object_WALL, 12, 3);
-        lev.addBlock(Block.object_WALL, 13, 3);
-        lev.addBlock(Block.object_WALL, 14, 3);
-        lev.addBlock(Block.object_WALL, 15, 3);
-        lev.addBlock(Block.object_WALL, 16, 3);
-        lev.addBlock(Block.object_WALL, 17, 3);
-        lev.addBlock(Block.object_WALL, 18, 3);
-        lev.addBlock(Block.object_WALL, 19, 3);
-        lev.addBlock(Block.object_WALL, 20, 3);
-        lev.addBlock(Block.object_WALL, 21, 3);
-        lev.addBlock(Block.object_WALL, 22, 3);
-
-        lev.addBlock(Block.object_WALL, 12, 7);
-        lev.addBlock(Block.object_WALL, 13, 7);
-        lev.addBlock(Block.object_WALL, 14, 7);
-        lev.addBlock(Block.object_WALL, 15, 7);
-        lev.addBlock(Block.object_WALL, 16, 7);
-        lev.addBlock(Block.object_WALL, 17, 7);
-        lev.addBlock(Block.object_WALL, 18, 7);
-        lev.addBlock(Block.object_WALL, 19, 7);
-        lev.addBlock(Block.object_WALL, 20, 7);
-        lev.addBlock(Block.object_WALL, 21, 7);
-        lev.addBlock(Block.object_WALL, 22, 7);
-
-        //putting level 00 into the level list.
+        
+        Level lev = new Level(35,20);
+        
+        lev.addBlock(Block.text_BABA, 1, 1);
+        lev.addBlock(Block.text_IS, 2, 1);
+        lev.addBlock(Block.text_YOU, 3, 1);
+        lev.addBlock(Block.object_BABA, 2, 3);
+        
         LevelList.put("00", lev);
-
+                
         initComponents();
-        
-        
-        
-        /*
-        panelGame.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("Up"), "actionUP");
-        panelGame.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("Up"), "actionUP");
-        panelGame.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("Up"), "actionDOWN");
-        panelGame.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("Up"), "actionDOWN");
-        panelGame.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("Up"), "actionLEFT");
-        panelGame.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("Up"), "actionLEFT");
-        panelGame.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("Up"), "actionRIGHT");
-        panelGame.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("Up"), "actionRIGHT");
-        
-        panelGame.getActionMap().put("actionUP", new AbstractAction("actUP") {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                move2("up");
-            }
-        });
-        panelGame.getActionMap().put("actionDOWN", new AbstractAction("actDOWN") {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                move2("down");
-            }
-        });
-        panelGame.getActionMap().put("actionLEFT", new AbstractAction("actLEFT") {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                move2("left");
-            }
-        });
-        panelGame.getActionMap().put("actionRIGHT", new AbstractAction("actRIGHT") {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                move2("right");
-            }
-        });
-         */
+
     }
 
     /**
@@ -194,32 +116,36 @@ public class MainWindow extends javax.swing.JFrame {
         panelGameLayout.setHorizontalGroup(
             panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGameLayout.createSequentialGroup()
-                .addGroup(panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelGameLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(button_left)
-                        .addGap(49, 49, 49)
-                        .addComponent(button_right))
-                    .addGroup(panelGameLayout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(button_up))
-                    .addGroup(panelGameLayout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(button_down)))
+                .addGap(110, 110, 110)
+                .addComponent(button_left)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 324, Short.MAX_VALUE)
+                .addComponent(button_right)
+                .addGap(236, 236, 236))
+            .addGroup(panelGameLayout.createSequentialGroup()
+                .addGap(309, 309, 309)
+                .addComponent(button_down)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelGameLayout.createSequentialGroup()
+                    .addGap(315, 315, 315)
+                    .addComponent(button_up)
+                    .addContainerGap(416, Short.MAX_VALUE)))
         );
         panelGameLayout.setVerticalGroup(
             panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGameLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(button_up)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(228, 228, 228)
                 .addGroup(panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button_left)
                     .addComponent(button_right))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(79, 79, 79)
                 .addComponent(button_down)
-                .addContainerGap(710, Short.MAX_VALUE))
+                .addContainerGap(363, Short.MAX_VALUE))
+            .addGroup(panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelGameLayout.createSequentialGroup()
+                    .addGap(156, 156, 156)
+                    .addComponent(button_up)
+                    .addContainerGap(539, Short.MAX_VALUE)))
         );
 
         jButton1.setText("jButton1");
@@ -250,15 +176,14 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addGap(0, 1052, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jButton3)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,8 +194,8 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jButton2)
                     .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(panelGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -299,24 +224,27 @@ public class MainWindow extends javax.swing.JFrame {
         lev.addBlock(Block.object_BABA, 2, 3);
         
         saveFile(lev);
-         */
+        */
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void button_rightActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_button_rightActionPerformed
     {//GEN-HEADEREND:event_button_rightActionPerformed
-        move2("right");
+        move2( "right" );
     }//GEN-LAST:event_button_rightActionPerformed
 
-    private void button_upActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_upActionPerformed
-        move2("up");
-    }//GEN-LAST:event_button_upActionPerformed
-
-    private void button_leftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_leftActionPerformed
-        move2("left");
+    private void button_leftActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_button_leftActionPerformed
+    {//GEN-HEADEREND:event_button_leftActionPerformed
+        move2( "left" );
     }//GEN-LAST:event_button_leftActionPerformed
 
-    private void button_downActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_downActionPerformed
-        move2("down");
+    private void button_upActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_button_upActionPerformed
+    {//GEN-HEADEREND:event_button_upActionPerformed
+        move2( "up" );
+    }//GEN-LAST:event_button_upActionPerformed
+
+    private void button_downActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_button_downActionPerformed
+    {//GEN-HEADEREND:event_button_downActionPerformed
+        move2( "down" );
     }//GEN-LAST:event_button_downActionPerformed
 
     /**
@@ -346,7 +274,6 @@ public class MainWindow extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        //Key Binds
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             try {
@@ -372,25 +299,27 @@ public class MainWindow extends javax.swing.JFrame {
     private void runGame() throws IOException {
 
         levelbuilder = new LevelBuilder();
-
+        
         level = LevelList.get("00");
         currentLevel = "00";
-
+        
         levelbuilder.paint(panelGame.getGraphics(), level);
+        
+        
 
     }
-
-    private void move(KeyEvent e) {
+    
+    private void move(KeyEvent e)
+    {
         Mover m = new Mover();
-
+        
         int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) {
+        
+        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A)
             m.moveLeft(LevelList, currentLevel);
-        }
     }
-
-    private Level openFile() {
+    private Level openFile()
+    {
         File currentFile = null;
         Level lev = null;
         try {
@@ -399,13 +328,14 @@ public class MainWindow extends javax.swing.JFrame {
             jfc.addChoosableFileFilter(new FileNameExtensionFilter("BabaIsYou Level", "baba"));
             jfc.setFileSelectionMode(JFileChooser.FILES_ONLY);
             jfc.setCurrentDirectory(new File("C:\\Users\\scien\\Desktop\\"));
-            if (jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            if(jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+            {
                 currentFile = jfc.getSelectedFile();
                 FileInputStream fis = new FileInputStream(currentFile);
                 ObjectInputStream ois = new ObjectInputStream(fis);
 
                 lev = (Level) ois.readObject();
-
+                
             }
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(this, "File was missing or obstructed.", "ERROR: FILE NOT FOUND", JOptionPane.ERROR_MESSAGE);
@@ -414,19 +344,22 @@ public class MainWindow extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(this, "Class was missing or obstructed.", "ERROR: CLASS NOT FOUND", JOptionPane.ERROR_MESSAGE);
         }
-
+        
         return lev;
     }
-
-    private void saveFile(Level lev) {
-
+    
+    private void saveFile(Level lev)
+    {
+        
         JFileChooser jfc = new JFileChooser();
         File file = new File("C:\\Users\\scien\\Desktop\\" + "BROKEN" + ".baba\\"); // orig lev.getName() 
         jfc.setCurrentDirectory(file);
 
+        
         try {
-
-            if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            
+            if(jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION)
+            {
                 FileOutputStream fos = new FileOutputStream(file);
                 ObjectOutputStream oos = new ObjectOutputStream(fos);
                 oos.writeObject(lev);
@@ -440,10 +373,12 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }
 
-    private void move2(String dir) {
+    private void move2(String dir)
+    {
         Mover m = new Mover();
 
-        switch (dir) {
+        switch( dir )
+        {
             case "right":
                 m.moveRight(LevelList, currentLevel);
                 break;
@@ -456,11 +391,11 @@ public class MainWindow extends javax.swing.JFrame {
             case "down":
                 m.moveDown(LevelList, currentLevel);
                 break;
-
+            
         }
-
-        level.setMap(m.getMap());
-
-        levelbuilder.paint(panelGame.getGraphics(), level);
+        
+        level.setMap( m.getMap() );
+        
+        levelbuilder.paint( panelGame.getGraphics(), level );
     }
 }
