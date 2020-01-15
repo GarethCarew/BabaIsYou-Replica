@@ -83,11 +83,11 @@ class Mover {
         {
             if( noun.contains( map[x][y - 1].name() ) && verb.contains( map[x][y + 1].name() ) )                                //compares if a noun and verb are horizontally next to an IS
             {
-                temp += ( map[x][y - 1].name() + " " + map[x][y + 1].name() + " " + x + " " + y );
+                temp += ( map[x][y - 1].name() + " " + map[x][y + 1].name());
             }
             else if( noun.contains( map[x - 1][y].name() ) && verb.contains( map[x + 1][y].name() ) )                           //compares if a noun and a verb are vertically next to an IS
             {
-                temp += ( map[x - 1][y].name() + " " + map[x + 1][y].name() + " " + x + " " + y );
+                temp += ( map[x - 1][y].name() + " " + map[x + 1][y].name());
             }
         }
         if( !temp.equals( "" ) )
