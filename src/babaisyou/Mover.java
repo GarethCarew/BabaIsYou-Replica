@@ -23,10 +23,13 @@ class Mover {
     private ArrayList<Scanner> you = new ArrayList<>();
     private ArrayList<String> stop = new ArrayList<>();
     private ArrayList<String> push = new ArrayList<>();
+    private ArrayList<String> win = new ArrayList<>();
     
     private ArrayList<String> cords_text = new ArrayList<>();
     private ArrayList<String> cords_obj = new ArrayList<>();
     private ArrayList<String> cords_is = new ArrayList<>();
+    
+    private Boolean won = false;
     
     private Block[][] map;
     
@@ -128,8 +131,11 @@ class Mover {
             case "text_PUSH":
                 push.add( x + " " + y );
                 break;
+            case "text_WIN":
+                win.add( x + " " + y );
+                break;
             default:
-                System.out.println("ERROR type not found");
+                System.out.println( "ERROR type not found: " + n );
         }
     }
     
@@ -232,7 +238,12 @@ class Mover {
 
                     while( true )
                     {
-                        if( push.contains( x + " " + ( y + 1 ) ) )
+                        if( win.contains ( x + " " + ( y + 1 ) ) )
+                        {
+                            won = true;
+                            break;
+                        }
+                        else if( push.contains( x + " " + ( y + 1 ) ) )
                         {
                             pushing.add( new Scanner( x + " " + ( y + 1 ) ) );
                             y++;
@@ -272,7 +283,12 @@ class Mover {
 
                     while( true )
                     {
-                        if( push.contains( x + " " + ( y - 1 ) ) )
+                        if( win.contains ( x + " " + ( y - 1 ) ) )
+                        {
+                            won = true;
+                            break;
+                        }
+                        else if( push.contains( x + " " + ( y - 1 ) ) )
                         {
                             pushing.add( new Scanner( x + " " + ( y - 1 ) ) );
                             y--;
@@ -312,7 +328,12 @@ class Mover {
 
                     while( true )
                     {
-                        if( push.contains( ( x - 1 ) + " " + y ) )
+                        if( win.contains ( ( x - 1 ) + " " + y ) )
+                        {
+                            won = true;
+                            break;
+                        }
+                        else if( push.contains( ( x - 1 ) + " " + y ) )
                         {
                             pushing.add( new Scanner( ( x - 1 ) + " " + y ) );
                             x--;
@@ -352,7 +373,12 @@ class Mover {
 
                     while( true )
                     {
-                        if( push.contains( ( x + 1 ) + " " + y ) )
+                        if( win.contains ( ( x + 1 ) + " " + y ) )
+                        {
+                            won = true;
+                            break;
+                        }
+                        else if( push.contains( ( x + 1 ) + " " + y ) )
                         {
                             pushing.add( new Scanner( ( x + 1 ) + " " + y ) );
                             x++;
@@ -381,10 +407,14 @@ class Mover {
                     }
                 }
                 break;
-
         }
-        
     }
+    
+    public Boolean hasWon()
+    {
+        return won;
+    }
+    
 }
 
 
