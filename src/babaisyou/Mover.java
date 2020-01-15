@@ -17,105 +17,83 @@ import java.util.TreeMap;
  */
 class Mover {
 
-    private ArrayList<String> noun = new ArrayList<>( Arrays.asList( "text_BABA", "text_FLAG", "text_WALL", "text_ROCK" ) );
-    private ArrayList<String> verb = new ArrayList<>( Arrays.asList( "text_YOU", "text_WIN", "text_STOP", "text_PUSH" ) );
+    private ArrayList<  String  >   noun        = new ArrayList<>( Arrays.asList( "text_BABA",  "text_FLAG",    "text_WALL", "text_ROCK" ) );
+    private ArrayList<  String  >   verb        = new ArrayList<>( Arrays.asList( "text_YOU",   "text_WIN",     "text_STOP", "text_PUSH" ) );
     
-    private ArrayList<Scanner> you = new ArrayList<>();
-    private ArrayList<String> stop = new ArrayList<>();
-    private ArrayList<String> push = new ArrayList<>();
-    private ArrayList<String> win = new ArrayList<>();
+    private ArrayList<  Scanner >   you         = new ArrayList<>();
+    private ArrayList<  String  >   stop        = new ArrayList<>();
+    private ArrayList<  String  >   push        = new ArrayList<>();
+    private ArrayList<  String  >   win         = new ArrayList<>();
     
-    private ArrayList<String> cords_text = new ArrayList<>();
-    private ArrayList<String> cords_obj = new ArrayList<>();
-    private ArrayList<String> cords_is = new ArrayList<>();
+    private ArrayList<  String  >   cords_text  = new ArrayList<>();
+    private ArrayList<  String  >   cords_obj   = new ArrayList<>();
+    private ArrayList<  String  >   cords_is    = new ArrayList<>();
     
-    private Boolean won = false;
+    private Boolean                 won         = false;
     
-    private Block[][] map;
+    private Block[][]               map;
     
-    void moveRight( TreeMap<String,Level> LevelList, String currentLevel )
+    void moveRight( TreeMap< String, Level > LevelList, String currentLevel )
     {
-        long timeElapsed = System.nanoTime();
-
         addCords( LevelList, currentLevel );
 
         checkEachIs();
 
         moveReal( "right" );
-
-        long timeElapsed2 = System.nanoTime();
-
-        System.out.println( timeElapsed2 - timeElapsed );
     }
     
-    void moveLeft(TreeMap<String,Level> LevelList, String currentLevel)
+    void moveLeft( TreeMap< String, Level > LevelList, String currentLevel)
     {
-        long timeElapsed = System.nanoTime();
+        addCords( LevelList, currentLevel );
 
-            addCords( LevelList, currentLevel );
+        checkEachIs();
 
-            checkEachIs();
-            
-            moveReal( "left" );
-            
-            long timeElapsed2 = System.nanoTime();
-
-            System.out.println( timeElapsed2 - timeElapsed );
-
+        moveReal( "left" );
     }
     
-    void moveUp( TreeMap<String,Level> LevelList, String currentLevel )
+    void moveUp( TreeMap< String, Level > LevelList, String currentLevel )
     {
-        long timeElapsed = System.nanoTime();
-
         addCords( LevelList, currentLevel );
 
         checkEachIs();
 
         moveReal( "up" );
-
-        long timeElapsed2 = System.nanoTime();
-
-        System.out.println( timeElapsed2 - timeElapsed );
     }
 
-    void moveDown( TreeMap<String,Level> LevelList, String currentLevel )
+    void moveDown( TreeMap< String, Level > LevelList, String currentLevel )
     {
-        long timeElapsed = System.nanoTime();
-
         addCords( LevelList, currentLevel );
 
         checkEachIs();
 
         moveReal( "down" );
-
-        long timeElapsed2 = System.nanoTime();
-
-        System.out.println( timeElapsed2 - timeElapsed );
     }
     
-    private Scanner checkValidIs(String s)
+    private Scanner checkValidIs( String s )
     {
-        Scanner scan = new Scanner( s );
+        Scanner scan    = new Scanner( s );
+        String  temp    = "";
+        Scanner output  = null;
 
-        String type = scan.next();
-        int x = scan.nextInt();
-        int y = scan.nextInt();
-        
+        String  type    = scan.next();
+        int     x       = scan.nextInt();
+        int     y       = scan.nextInt();
+
         if( x > 0 && x < map.length )
         {
-            if( noun.contains( map[x][y - 1].name() ) && verb.contains( map[x][y + 1].name() ) )
+            if( noun.contains( map[x][y - 1].name() ) && verb.contains( map[x][y + 1].name() ) )                                //compares if a noun and verb are horizontally next to an IS
             {
-                Scanner output = new Scanner( map[x][y - 1].name() + " " + map[x][y + 1].name() + " " + x + " " + y);
-                return output;
+                temp += ( map[x][y - 1].name() + " " + map[x][y + 1].name() + " " + x + " " + y );
             }
-            else if( noun.contains( map[x - 1][y].name() ) && verb.contains( map[x + 1][y].name() ) )
+            else if( noun.contains( map[x - 1][y].name() ) && verb.contains( map[x + 1][y].name() ) )                           //compares if a noun and a verb are vertically next to an IS
             {
-                Scanner output = new Scanner( map[x - 1][y].name() + " " + map[x + 1][y].name() + " " + x + " " + y);
-                return output;
+                temp += ( map[x - 1][y].name() + " " + map[x + 1][y].name() + " " + x + " " + y );
             }
         }
-        return null;
+        if( !temp.equals( "" ) )
+            output = new Scanner( temp );
+
+        return output;
     }
 
     private void addProp(String n, int x, int y)
@@ -178,10 +156,22 @@ class Mover {
                     scan.useDelimiter( "_" );
                     scan.next();
                     scan.useDelimiter( " " );
+
                     String v = scan.next();                                     //v == verb
-                    
-                    
                     String n = scan.next();                                     //n == noun
+
+                    String v2 = "";
+                    String n2 = "";
+
+                    if( scan.hasNext() )                                        //if there is a next, then there MUST be a vertical IS aswell
+                    {
+                        scan.useDelimiter( "_" );
+                        scan.next();
+                        scan.useDelimiter( " " );
+
+                        v2 = scan.next();                                       //v == verb
+                        n2 = scan.next();                                       //n == noun
+                    }
                     
                     for( String o : cords_obj )
                     {
@@ -198,6 +188,10 @@ class Mover {
                         if( check.equals( v ) )
                         {
                             addProp( n, x, y );
+                        }
+                        if( check.equals( v2 ) )
+                        {
+                            addProp( n2, x, y );
                         }
                     }
                 }
