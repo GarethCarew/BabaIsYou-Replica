@@ -53,7 +53,8 @@ public class MainWindow extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
         panelGame = new javax.swing.JPanel();
@@ -84,29 +85,37 @@ public class MainWindow extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1258, 730));
 
         button_left.setText("LEFT");
-        button_left.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        button_left.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 button_leftActionPerformed(evt);
             }
         });
 
         button_right.setText("RIGHT");
-        button_right.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        button_right.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 button_rightActionPerformed(evt);
             }
         });
 
         button_down.setText("DOWN");
-        button_down.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        button_down.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 button_downActionPerformed(evt);
             }
         });
 
         button_up.setText("UP");
-        button_up.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        button_up.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 button_upActionPerformed(evt);
             }
         });
@@ -116,51 +125,61 @@ public class MainWindow extends javax.swing.JFrame {
         panelGameLayout.setHorizontalGroup(
             panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGameLayout.createSequentialGroup()
-                .addGroup(panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelGameLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(button_left)
-                        .addGap(18, 18, 18)
-                        .addComponent(button_right))
-                    .addGroup(panelGameLayout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(button_up))
-                    .addGroup(panelGameLayout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(button_down)))
-                .addContainerGap(640, Short.MAX_VALUE))
+                .addGap(110, 110, 110)
+                .addComponent(button_left)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 324, Short.MAX_VALUE)
+                .addComponent(button_right)
+                .addGap(236, 236, 236))
+            .addGroup(panelGameLayout.createSequentialGroup()
+                .addGap(309, 309, 309)
+                .addComponent(button_down)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelGameLayout.createSequentialGroup()
+                    .addGap(315, 315, 315)
+                    .addComponent(button_up)
+                    .addContainerGap(416, Short.MAX_VALUE)))
         );
         panelGameLayout.setVerticalGroup(
             panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGameLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(button_up)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(228, 228, 228)
                 .addGroup(panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button_left)
                     .addComponent(button_right))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(79, 79, 79)
                 .addComponent(button_down)
-                .addContainerGap(618, Short.MAX_VALUE))
+                .addContainerGap(363, Short.MAX_VALUE))
+            .addGroup(panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelGameLayout.createSequentialGroup()
+                    .addGap(156, 156, 156)
+                    .addComponent(button_up)
+                    .addContainerGap(539, Short.MAX_VALUE)))
         );
 
         jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton1ActionPerformed(evt);
             }
         });
 
         jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton2ActionPerformed(evt);
             }
         });
 
         jButton3.setText("jButton3");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton3ActionPerformed(evt);
             }
         });
