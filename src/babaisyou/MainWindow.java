@@ -26,7 +26,7 @@ public class MainWindow extends javax.swing.JFrame {
     private LevelBuilder levelbuilder;
     private Level level;
     
-    /**
+    /***
      * Creates new form MainWindow
      * @throws java.io.IOException
      */
