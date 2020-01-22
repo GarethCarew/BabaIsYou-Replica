@@ -11,6 +11,6 @@ package babaisyou;
  */
 public enum Block 
 {
-    text_IS, text_BABA, text_YOU, text_WIN, text_FLAG, text_STOP, text_WALL, text_ROCK, text_PUSH, object_EMPTY, object_BABA, object_FLAG, object_WALL, object_ROCK
+    text_IS, text_BABA, text_YOU, text_WIN, text_FLAG, text_STOP, text_WALL, text_ROCK, text_PUSH, EMPTY, object_BABA, object_FLAG, object_WALL, object_ROCK
 };
 

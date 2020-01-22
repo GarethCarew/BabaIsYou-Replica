@@ -5,11 +5,11 @@
  */
 package babaisyou;
 
+//import java.text.DecimalFormat;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.Iterator;
 
 /**
  *
@@ -17,22 +17,312 @@ import java.util.TreeMap;
  */
 class Mover {
 
-    private ArrayList<  String  >   noun        = new ArrayList<>( Arrays.asList( "text_BABA",  "text_FLAG",    "text_WALL", "text_ROCK" ) );
-    private ArrayList<  String  >   verb        = new ArrayList<>( Arrays.asList( "text_YOU",   "text_WIN",     "text_STOP", "text_PUSH" ) );
+    private final ArrayList<  Block  >   nouns       = new ArrayList<>( Arrays.asList( Block.text_BABA, Block.text_FLAG, Block.text_WALL, Block.text_ROCK         ));
+    private final ArrayList<  Block  >   verbs       = new ArrayList<>( Arrays.asList( Block.text_YOU, Block.text_WIN, Block.text_STOP, Block.text_PUSH           ));
+    private final ArrayList<  Block  >   objects      = new ArrayList<>( Arrays.asList( Block.object_BABA, Block.object_FLAG, Block.object_ROCK, Block.object_WALL));
     
-    private ArrayList<  Scanner >   you         = new ArrayList<>();
-    private ArrayList<  String  >   stop        = new ArrayList<>();
-    private ArrayList<  String  >   push        = new ArrayList<>();
-    private ArrayList<  String  >   win         = new ArrayList<>();
-    
-    private ArrayList<  String  >   cords_text  = new ArrayList<>();
-    private ArrayList<  String  >   cords_obj   = new ArrayList<>();
-    private ArrayList<  String  >   cords_is    = new ArrayList<>();
+    private ArrayList<  int[]  >   toBeMoved   = new ArrayList<>();
+    private ArrayList<  Block  >   you         = new ArrayList<>();
+    private ArrayList<  Block  >   stop        = new ArrayList<>();
+    private ArrayList<  Block  >   push        = new ArrayList<>();
+    private ArrayList<  Block  >   win         = new ArrayList<>();
     
     private Boolean                 won         = false;
     
-    private Block[][]               map;
+    private Block[][][]             map;
+   
+    Mover(Level lev)
+    {
+        setMap(lev.getMap());
+
+        findProps();
+        getTBM();
+    }
     
+    public void move (String dir)
+    {
+        switch (dir)
+        {
+            case "up":
+                go("up");
+                break;
+            case "down":
+                go("down");
+                break;
+            case "left":
+                go("left");
+                break;
+            case "right":
+                go("right");
+                break;
+        }
+    }
+
+    public Block[][][] getMap() 
+    {
+        return map;
+    }
+
+    private void setMap(Block[][][] map) 
+    {
+        this.map = map;
+    }
+
+    private boolean hasProp(Block b, Block prop)
+    {
+        boolean has = false;
+        
+        switch (prop) {
+            case text_YOU:
+                if(you.contains(b))
+                    has = true;
+                break;
+            case text_PUSH:
+                if(push.contains(b))
+                    has = true;
+                break; 
+            case text_STOP:
+                if(stop.contains(b))
+                    has = true;
+                break;
+            case text_WIN:
+                if(win.contains(b))
+                    has = true;
+            default:
+                break;
+        }
+        
+        return has;
+    }
+
+    private void findProps()
+    {
+        for(int y = 0; y < map.length; y++)
+        {
+            for(int x = 0; x < map[y].length; x++)
+            {
+                for(int z = 0; z < map[y][x].length; z++)
+                {
+                    if(map[y][x][z] == Block.text_IS)
+                    {
+                        Block up = null;
+                        Block down = null;
+                        Block left = null;
+                        Block right = null;
+                        
+                        for(int t = 0; t < 5; t++)
+                        {
+                            if(map[y-1][x][t] != null)
+                            {
+                                if(map[y-1][x][t].toString().contains("text_"))
+                                    up = map[y-1][x][t];
+                            }
+                            if(map[y+1][x][t] != null)
+                            {
+                                if(map[y+1][x][t].toString().contains("text_"))
+                                    down = map[y+1][x][t];
+                            }
+                            if(map[y][x-1][t] != null)
+                            {
+                                if(map[y][x-1][t].toString().contains("text_"))
+                                    left = map[y][x-1][t];
+                            }
+                            if(map[y][x+1][t] != null)
+                            {
+                                if(map[y][x+1][t].toString().contains("text_"))
+                                    right = map[y][x+1][t];
+                            }
+                        }
+
+                        if(up != null && down != null)
+                        {
+                            addProp(up, down);
+                        }
+                        
+                        if(left != null && right != null)
+                        {
+                            addProp(left, right);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void addProp(Block obj, Block prop) {
+        Block toBeAdded = null;
+
+        switch (obj)
+        {
+            case text_BABA:
+                toBeAdded = Block.object_BABA;
+                break;
+            case text_WALL:
+                toBeAdded = Block.object_WALL;
+                break;
+            case text_ROCK:
+                toBeAdded = Block.object_ROCK;
+                break;
+            case text_FLAG:
+                toBeAdded = Block.object_FLAG;
+                break;
+            default:
+                break;
+        }
+
+        switch (prop)
+        {
+            case text_YOU:
+                you.add(toBeAdded);
+                break;
+            case text_STOP:
+                stop.add(toBeAdded);
+                break;
+            case text_PUSH:
+                push.add(toBeAdded);
+                break;
+            case text_WIN:
+                win.add(toBeAdded);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private boolean canGo(String dir, int x, int y) {
+        boolean canMove = true;
+        
+        if(isStopped(dir, x, y))
+            canMove = false;
+        if(onEdge(dir, x, y))
+            canMove = false;
+        return canMove;
+    }
+    
+    private void go(String dir) {
+        Block b = null;
+        
+        int x, y, z = 0;
+
+        int[] coords = new int[3];
+        
+        Iterator it = toBeMoved.iterator();
+        
+        while(it.hasNext())
+        {
+            coords = (int[])it.next();
+            x = coords[0];
+            y = coords[1];
+            z = coords[2];
+            
+            if(canGo(dir, x, y))
+            {
+                b = map[y][x][z];
+
+                map[y][x][z] = null; //after basics is done add optimization: move all other blocks on that Z-coord down.
+
+                z = 0;
+
+                switch (dir)
+                {
+                    case "up":
+                        y--;
+                        break;
+                    case "down":
+                        y++;
+                        break;
+                    case "left":
+                        x--;
+                        break;
+                    case "right":
+                        x++;
+                        break;
+                    default:
+                        break;
+                }
+
+                while(map[y][x][z] != null)
+                {
+                    z++;
+                }
+                map[y][x][z] = b;
+            }
+        }
+    }
+
+    private boolean onEdge(String dir, int x, int y) {
+        boolean isOnEdge = false;
+        switch(dir)
+        {
+            case "up":
+                if(y == 0)
+                    isOnEdge = true;
+                break;
+            case "down":
+                if(y == map.length)
+                    isOnEdge = true;
+                break;
+            case "left":
+                if(x == 0)
+                    isOnEdge = true;
+                break;
+            case "right":
+                if(x == map[y].length)
+                    isOnEdge = true;
+                break;
+        }
+        return isOnEdge;
+    }
+
+    private boolean isStopped(String dir, int x, int y) {
+        boolean isBeingStopped = false;
+        for(int z = 0; z < 5; z++)
+        {
+            switch(dir)
+            {
+                case "up":
+                    if(stop.contains(map[y-1][x][z]))
+                        isBeingStopped = true;
+                    break;
+                case "down":
+                    if(stop.contains(map[y+1][x][z]))
+                        isBeingStopped = true;
+                    break;
+                case "left":
+                    if(stop.contains(map[y][x-1][z]))
+                        isBeingStopped = true;
+                    break;
+                case "right":
+                    if(stop.contains(map[y][x+1][z]))
+                        isBeingStopped = true;
+                    break;
+            }
+        }
+        return isBeingStopped;
+    }
+
+    private void getTBM() {
+        for(int i = 0; i < you.size(); i ++)
+        {
+            for(int y = 0; y < map.length; y++)
+            {
+                for(int x = 0; x <map[y].length; x++)
+                {
+                    for(int z = 0; z < map[y][x].length; z++)
+                    {
+                        if(map[y][x][z] == you.get(i))
+                        {
+                            toBeMoved.add(new int[] {x,y,z});
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+    
+    /*||||||||||||||||MOVE V2.0|||||||||||||||||||||||||||||||||||||||||||||||||
     void moveRight( TreeMap< String, Level > LevelList, String currentLevel )
     {
         addCords( LevelList, currentLevel );
@@ -41,7 +331,7 @@ class Mover {
 
         moveReal( "right" );
     }
-    
+     
     void moveLeft( TreeMap< String, Level > LevelList, String currentLevel)
     {
         addCords( LevelList, currentLevel );
@@ -81,13 +371,14 @@ class Mover {
 
         if( x > 0 && x < map.length )
         {
-            if( noun.contains( map[x][y - 1].name() ) && verb.contains( map[x][y + 1].name() ) )                                //compares if a noun and verb are horizontally next to an IS
+            
+            if( noun.contains( map[x][y - 1].toString() ) && verb.contains( map[x][y + 1].toString() ) )                                //compares if a noun and verb are horizontally next to an IS
             {
-                temp += ( map[x][y - 1].name() + " " + map[x][y + 1].name());
+                temp += ( map[x][y - 1].toString() + " " + map[x][y + 1].toString());
             }
-            else if( noun.contains( map[x - 1][y].name() ) && verb.contains( map[x + 1][y].name() ) )                           //compares if a noun and a verb are vertically next to an IS
+            else if( noun.contains( map[x - 1][y].toString() ) && verb.contains( map[x + 1][y].toString() ) )                           //compares if a noun and a verb are vertically next to an IS
             {
-                temp += ( map[x - 1][y].name() + " " + map[x + 1][y].name());
+                temp += ( map[x - 1][y].toString() + " " + map[x + 1][y].toString());
             }
         }
         if( !temp.equals( "" ) )
@@ -117,7 +408,7 @@ class Mover {
         }
     }
     
-    public Block[][] getMap()
+    public Block[][][] getMap()
     {
         return map;
     }
@@ -126,21 +417,24 @@ class Mover {
     {
         map = LevelList.get( currentLevel ).getMap();
 
-            for( int i = 0; i < map.length; i++ )
+            for( int y = 0; y < map.length; y++ )
             {
-                for( int e = 0; e < map[i].length; e++ )
+                for( int x = 0; x < map[y].length; x++ )
                 {
-                    if( !map[i][e].name().equals( "object_EMPTY" ) && map[i][e].name().equals( "text_IS" ) )
+                    for( int z = 0; z < map[y][x].length; z++)
                     {
-                        cords_is.add(map[i][e].name() + " " + i + " " + e );
-                    }
-                    else if( !map[i][e].name().equals( "object_EMPTY" ) && map[i][e].name().contains( "text" ) )
-                    {
-                        cords_text.add(map[i][e].name() + " " + i + " " + e );
-                    }
-                    else if( !map[i][e].name().equals( "object_EMPTY" ) && map[i][e].name().contains( "object" ) )
-                    {
-                        cords_obj.add(map[i][e].name() + " " + i + " " + e );
+                        if(map[y][x][z] == Block.text_IS )
+                        {
+                            cords_is.add("text_IS " + y + " " + x);
+                        }
+                        else if(map[y][x][z].toString().contains( "text" ) )
+                        {
+                            cords_text.add(map[y][x][z].toString() + " " + y + " " + x );
+                        }
+                        else if(map[y][x][z].toString().contains( "object" ) )
+                        {
+                            cords_obj.add(map[y][x][z].toString() + " " + y + " " + x );
+                        }
                     }
                 }
             }
@@ -410,9 +704,11 @@ class Mover {
     }
     
 }
+*/
 
 
-/*
+
+/* |||||||||||||||MOVE V 1.0||||||||||||||||||||||||||||||||||||||||||||||||||||
 void moveRight( TreeMap<String,Level> LevelList, String currentLevel )
         {
         

@@ -26,7 +26,7 @@ public class Images {
     public final Image text_WALL;
     public final Image text_ROCK;
     public final Image text_PUSH;
-    public final Image object_EMPTY;
+    public final Image EMPTY;
     public final Image object_BABA;
     public final Image object_FLAG;
     public final Image object_WALL_noC;
@@ -43,7 +43,7 @@ public class Images {
         text_WALL = ImageIO.read(new File("src/objects/text_wall_0_1.png"));
         text_ROCK = ImageIO.read(new File("src/objects/text_rock_0_1.png"));
         text_PUSH = ImageIO.read(new File("src/objects/text_push_0_1.png"));
-        object_EMPTY = ImageIO.read(new File("src/objects/empty_0_1.png"));
+        EMPTY = ImageIO.read(new File("src/objects/empty_0_1.png"));
         object_BABA = ImageIO.read(new File("src/objects/baba_0_1.png"));
         object_FLAG = ImageIO.read(new File("src/objects/flag_0_1.png"));
         object_WALL_noC = ImageIO.read(new File("src/objects/wall_0_1.png"));

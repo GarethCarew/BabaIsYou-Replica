@@ -13,43 +13,43 @@ package babaisyou;
 class Level
 {
     
-    private Block[][] map;
-
-    private String[][] properties;
-         
+    private Block[][][] map;
+    
     public Level()
     {
-        map = new Block[0][0];
-        properties = new String[0][0];
+        map = new Block[0][0][5];
     }
     
     public Level(int xSize, int ySize)
     {
-        map         = new Block[    ySize ][ xSize ];
-        properties  = new String[   ySize ][ xSize ];
+        map = new Block[ ySize ][ xSize ][5];
+        
+        for(int y = 0; y < map.length; y++)
+        {
+            for(int x = 0; x < map[y].length; x++)
+            {
+                map[y][x][0] = Block.EMPTY;
+            }
+        }
     }
     
     public void addBlock(Block b, int xPos, int yPos)
     {
-        map[yPos][xPos] = b;
+        int i = 0;
+        
+        while(map[yPos][xPos][i] != null)
+        {
+            i++;
+        }
+        map[yPos][xPos][i] = b;
     }
 
-    public Block[][] getMap()
+    public Block[][][] getMap()
     {
-        for (int x = 0; x < map.length; x++)
-        {
-            for(int y = 0; y < map[x].length; y++)
-            {
-                if(map[x][y] == null)
-                {
-                    map[x][y] = Block.object_EMPTY;
-                }
-            }
-        }
         return map;
     }
 
-    public void setMap(Block[][] map)
+    public void setMap(Block[][][] map)
     {
         this.map = map;
     }

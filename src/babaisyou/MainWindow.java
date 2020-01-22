@@ -35,10 +35,55 @@ public class MainWindow extends javax.swing.JFrame {
         
         Level lev = new Level(35,20);
         
-        lev.addBlock(Block.text_BABA, 1, 1);
-        lev.addBlock(Block.text_IS, 2, 1);
-        lev.addBlock(Block.text_YOU, 3, 1);
-        lev.addBlock(Block.object_BABA, 2, 3);
+        //Text
+        lev.addBlock(Block.text_BABA, 12, 1);
+        lev.addBlock(Block.text_IS, 13, 1);
+        lev.addBlock(Block.text_YOU, 14, 1);
+        
+        lev.addBlock(Block.text_FLAG, 20, 1);
+        lev.addBlock(Block.text_IS, 21, 1);
+        lev.addBlock(Block.text_WIN, 22, 1);
+        
+        lev.addBlock(Block.text_WALL, 12, 9);
+        lev.addBlock(Block.text_IS, 13, 9);
+        lev.addBlock(Block.text_STOP, 14, 9);
+        
+        lev.addBlock(Block.text_ROCK, 20, 9);
+        lev.addBlock(Block.text_IS, 21, 9);
+        lev.addBlock(Block.text_PUSH, 22, 9);
+        
+        //Objects
+        lev.addBlock(Block.object_BABA, 13, 5);
+        
+        lev.addBlock(Block.object_FLAG, 21, 5);
+        
+        lev.addBlock(Block.object_ROCK, 17, 4);
+        lev.addBlock(Block.object_ROCK, 17, 5);
+        lev.addBlock(Block.object_ROCK, 17, 6);
+        
+        lev.addBlock(Block.object_WALL, 12, 3);
+        lev.addBlock(Block.object_WALL, 13, 3);
+        lev.addBlock(Block.object_WALL, 14, 3);
+        lev.addBlock(Block.object_WALL, 15, 3);
+        lev.addBlock(Block.object_WALL, 16, 3);
+        lev.addBlock(Block.object_WALL, 17, 3);
+        lev.addBlock(Block.object_WALL, 18, 3);
+        lev.addBlock(Block.object_WALL, 19, 3);
+        lev.addBlock(Block.object_WALL, 20, 3);
+        lev.addBlock(Block.object_WALL, 21, 3);
+        lev.addBlock(Block.object_WALL, 22, 3);
+        
+        lev.addBlock(Block.object_WALL, 12, 7);
+        lev.addBlock(Block.object_WALL, 13, 7);
+        lev.addBlock(Block.object_WALL, 14, 7);
+        lev.addBlock(Block.object_WALL, 15, 7);
+        lev.addBlock(Block.object_WALL, 16, 7);
+        lev.addBlock(Block.object_WALL, 17, 7);
+        lev.addBlock(Block.object_WALL, 18, 7);
+        lev.addBlock(Block.object_WALL, 19, 7);
+        lev.addBlock(Block.object_WALL, 20, 7);
+        lev.addBlock(Block.object_WALL, 21, 7);
+        lev.addBlock(Block.object_WALL, 22, 7);
         
         LevelList.put("00", lev);
                 
@@ -53,8 +98,7 @@ public class MainWindow extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
         panelGame = new javax.swing.JPanel();
@@ -85,37 +129,29 @@ public class MainWindow extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1258, 730));
 
         button_left.setText("LEFT");
-        button_left.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        button_left.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_leftActionPerformed(evt);
             }
         });
 
         button_right.setText("RIGHT");
-        button_right.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        button_right.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_rightActionPerformed(evt);
             }
         });
 
         button_down.setText("DOWN");
-        button_down.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        button_down.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_downActionPerformed(evt);
             }
         });
 
         button_up.setText("UP");
-        button_up.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        button_up.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_upActionPerformed(evt);
             }
         });
@@ -125,61 +161,51 @@ public class MainWindow extends javax.swing.JFrame {
         panelGameLayout.setHorizontalGroup(
             panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGameLayout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addComponent(button_left)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 324, Short.MAX_VALUE)
-                .addComponent(button_right)
-                .addGap(236, 236, 236))
-            .addGroup(panelGameLayout.createSequentialGroup()
-                .addGap(309, 309, 309)
-                .addComponent(button_down)
+                .addGroup(panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelGameLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(button_left)
+                        .addGap(18, 18, 18)
+                        .addComponent(button_right))
+                    .addGroup(panelGameLayout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(button_up))
+                    .addGroup(panelGameLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(button_down)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelGameLayout.createSequentialGroup()
-                    .addGap(315, 315, 315)
-                    .addComponent(button_up)
-                    .addContainerGap(416, Short.MAX_VALUE)))
         );
         panelGameLayout.setVerticalGroup(
             panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGameLayout.createSequentialGroup()
-                .addGap(228, 228, 228)
+                .addContainerGap()
+                .addComponent(button_up)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(button_left)
                     .addComponent(button_right))
-                .addGap(79, 79, 79)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(button_down)
-                .addContainerGap(363, Short.MAX_VALUE))
-            .addGroup(panelGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelGameLayout.createSequentialGroup()
-                    .addGap(156, 156, 156)
-                    .addComponent(button_up)
-                    .addContainerGap(539, Short.MAX_VALUE)))
+                .addContainerGap(725, Short.MAX_VALUE))
         );
 
         jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
         jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
         jButton3.setText("jButton3");
-        jButton3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
@@ -191,14 +217,15 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton3)
+                        .addGap(0, 1023, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,22 +271,22 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void button_rightActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_button_rightActionPerformed
     {//GEN-HEADEREND:event_button_rightActionPerformed
-        move2( "right" );
+        move( "right" );
     }//GEN-LAST:event_button_rightActionPerformed
 
     private void button_leftActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_button_leftActionPerformed
     {//GEN-HEADEREND:event_button_leftActionPerformed
-        move2( "left" );
+        move( "left" );
     }//GEN-LAST:event_button_leftActionPerformed
 
     private void button_upActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_button_upActionPerformed
     {//GEN-HEADEREND:event_button_upActionPerformed
-        move2( "up" );
+        move( "up" );
     }//GEN-LAST:event_button_upActionPerformed
 
     private void button_downActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_button_downActionPerformed
     {//GEN-HEADEREND:event_button_downActionPerformed
-        move2( "down" );
+        move( "down" );
     }//GEN-LAST:event_button_downActionPerformed
 
     /**
@@ -315,24 +342,17 @@ public class MainWindow extends javax.swing.JFrame {
 
         levelbuilder = new LevelBuilder();
         
-        level = LevelList.get("00");
-        currentLevel = "00";
+        String key = "00";
+        
+        level = LevelList.get(key);
+        currentLevel = key;
         
         levelbuilder.paint(panelGame.getGraphics(), level);
         
         
 
     }
-    
-    private void move(KeyEvent e)
-    {
-        Mover m = new Mover();
-        
-        int key = e.getKeyCode();
-        
-        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A)
-            m.moveLeft(LevelList, currentLevel);
-    }
+
     private Level openFile()
     {
         File currentFile = null;
@@ -388,23 +408,25 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }
 
-    private void move2(String dir)
+    private void move(String dir)
     {
-        Mover m = new Mover();
+        long temp = System.nanoTime();
+                
+        Mover m = new Mover(LevelList.get(currentLevel));
 
         switch( dir )
         {
             case "right":
-                m.moveRight(LevelList, currentLevel);
+                m.move("right");
                 break;
             case "left":
-                m.moveLeft(LevelList, currentLevel);
+                m.move("left");
                 break;
             case "up":
-                m.moveUp(LevelList, currentLevel);
+                m.move("up");
                 break;
             case "down":
-                m.moveDown(LevelList, currentLevel);
+                m.move("down");
                 break;
             
         }
@@ -412,5 +434,7 @@ public class MainWindow extends javax.swing.JFrame {
         level.setMap( m.getMap() );
         
         levelbuilder.paint( panelGame.getGraphics(), level );
+        
+        System.out.println((System.nanoTime() - temp));
     }
 }
